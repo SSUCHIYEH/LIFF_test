@@ -8,6 +8,24 @@
 
 <body>
     <h1>hello_LIFF</h1>
+    <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <script>
+        function initializeLiff(myLiffId) {
+            liff
+                .init({
+                    liffId: myLiffId
+                })
+                .then(() => {
+                    // start to use LIFF's api
+                    initializeApp();
+                })
+                .catch((err) => {
+                });
+        }
+
+        initializeLiff('1656608345-0Yx6zYOX');
+
+    </script>
 </body>
 
 </html>
