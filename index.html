@@ -3,11 +3,37 @@
 
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>liff_test</title>
+    <title>收音機</title>
+    <style ref="stylesheet">
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: auto auto;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        img {
+            box-sizing: border-box;
+            margin: auto auto;
+            width: 320px;
+            height: 320px;
+        }
+        div{
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>hello_LIFF</h1>
+    <div >
+        <h4>點擊左右側，調整製要收聽的電台</h4>
+        <img src="./img/radio_1-10.png"></img>
+    </div>
+
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script>
         function initializeLiff(myLiffId) {
