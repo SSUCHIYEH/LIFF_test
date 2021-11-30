@@ -18,6 +18,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            width: 100vw;
         }
 
         /* img {
@@ -40,6 +41,7 @@
             width: 320px;
             height: 320px;
             background-repeat: no-repeat;
+            background-position-x: center;
             background-image: url(./img/radio_background.png);
         }
 
@@ -63,7 +65,8 @@
         input[type="range"] {
             -webkit-appearance: none;
             margin-top: 100px;
-            width: 225px;
+            width: 240px;
+            padding-right: 15px;
             height: 7px;
             background: linear-gradient(to right, #353022, #353022 50%, #494333);
             border-radius: 5px;
@@ -100,12 +103,21 @@
             <p><span id="rangevalue">90.0</span></p>
         </div>
         <div class="radio">
-            <input class="" type="range" min="900" max="956" step="1" value="90">
+            <input class="" type="range" min="900" max="960" step="1" value="90">
         </div>
     </div>
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
     <script>
+        let audio = []
+        let currentIdx = 0;
+        audio[0] = new Audio('./base.mp3')
+        audio[1] = new Audio('./think.mp3')
+        audio[0].autoplay = true
+        audio[0].loop = true
+        audio[1].loop = true
+        audio[currentIdx].play()
+
         //oninput="rangevalue.value=value"
         document.querySelector('input').addEventListener('input', function (evt) {
             const inputvalue = evt.target.value
@@ -113,6 +125,29 @@
             const channel = Math.floor(inputvalue / 10)
             let p = document.querySelector('#rangevalue')
             p.innerHTML = `${channel}.${rest}`
+
+            let nextIdx = currentIdx;
+            switch (`${channel}.${rest}`) {
+                case '91.4':
+                    nextIdx = 1
+                    break;
+
+                default:
+                    nextIdx = 0
+                    break;
+            }
+
+            if (currentIdx !== 0 && nextIdx === 0) {
+                audio[currentIdx].pause()
+                audio[nextIdx].play()
+                currentIdx = nextIdx;
+            }
+            else {
+                audio[currentIdx].pause()
+                audio[nextIdx].load()
+                audio[nextIdx].play()
+                currentIdx = nextIdx;
+            }
         })
     </script>
     <script>
