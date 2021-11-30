@@ -9,32 +9,112 @@
             box-sizing: border-box;
             margin: 0;
             padding: auto auto;
-            width: 100%;
+            width: 475px;
             overflow-x: hidden;
+
         }
 
-        img {
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* img {
             box-sizing: border-box;
             margin: auto auto;
             width: 320px;
-            height: 320px;
-        }
-        div{
+            height: auto;
+        } */
+
+        /* div {
             width: 100%;
             box-sizing: border-box;
             padding-left: 24px;
             padding-right: 24px;
+        } */
+
+        .radio {
+            display: flex;
+            justify-content: center;
+            width: 320px;
+            height: 320px;
+            background-repeat: no-repeat;
+            background-image: url(./img/radio_background.png);
+        }
+
+        .radio__line {
+            height: 50px;
+            width: auto;
+            margin-top: 38px;
+            margin-left: 35px;
+        }
+
+        .radio__btn {
+            width: 40px;
+            height: auto;
+        }
+
+        .radio__btn--nopadding {
+            padding: 0;
+
+        }
+
+        input[type="range"] {
+            -webkit-appearance: none;
+            margin-top: 100px;
+            width: 225px;
+            height: 7px;
+            background: linear-gradient(to right, #353022, #353022 50%, #494333);
+            border-radius: 5px;
+            background-image: linear-gradient(to left, #353022 60%, #494333 30%, #353022 10%);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 120px;
+            width: 60px;
+            background-repeat: no-repeat;
+            margin-bottom: 20px;
+            margin-left: 16px;
+            background-image: url(img/Lineandbutton.png);
+            cursor: ew-resize;
+        }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            -webkit-appearance: none;
+            box-shadow: none;
+            border: none;
+            background: transparent;
+            transition: background 0.3s ease-in-out;
         }
     </style>
 </head>
 
 <body>
-    <div >
-        <h4>點擊左右側，調整製要收聽的電台</h4>
-        <img src="./img/radio_1-10.png"></img>
+    <div class="container">
+        <div class="title">
+            <h4>左右拖曳滾動條，調整置正確的收音機頻道收聽節目內容</h4>
+            <p><span id="rangevalue">90.0</span></p>
+        </div>
+        <div class="radio">
+            <input class="" type="range" min="900" max="956" step="1" value="90">
+        </div>
     </div>
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
+    <script>
+        //oninput="rangevalue.value=value"
+        document.querySelector('input').addEventListener('input', function (evt) {
+            const inputvalue = evt.target.value
+            const rest = inputvalue % 10;
+            const channel = Math.floor(inputvalue / 10)
+            let p = document.querySelector('#rangevalue')
+            p.innerHTML = `${channel}.${rest}`
+        })
+    </script>
     <script>
         function initializeLiff(myLiffId) {
             liff
@@ -48,9 +128,7 @@
                 .catch((err) => {
                 });
         }
-
         initializeLiff('1656608345-0Yx6zYOX');
-
     </script>
 </body>
 
