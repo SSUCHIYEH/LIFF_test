@@ -101,7 +101,7 @@
             <p><span id="rangevalue">90.0</span></p>
         </div>
         <div class="radio">
-            <input class="" type="range" min="900" max="960" step="1" value="90">
+            <input class="" type="range" min="900" max="960" step="5" value="90">
         </div>
     </div>
 
@@ -119,8 +119,14 @@
         //oninput="rangevalue.value=value"
         document.querySelector('input').addEventListener('input', function (evt) {
             const inputvalue = evt.target.value
-            const rest = inputvalue % 10;
+            let rest = inputvalue % 10;
+
             const channel = Math.floor(inputvalue / 10)
+            if((channel % 2 )&& (rest === 5)) {
+                console.log("基數")
+                rest = 4
+            }
+
             let p = document.querySelector('#rangevalue')
             p.innerHTML = `${channel}.${rest}`
 
