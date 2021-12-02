@@ -32,6 +32,9 @@
             padding-left: 24px;
             padding-right: 24px;
         } */
+        #rangevalue{
+            font-size: 24px;
+        }
 
         .radio {
             display: flex;
@@ -41,6 +44,14 @@
             background-repeat: no-repeat;
             background-position-x: center;
             background-image: url(./img/radio_background.png);
+        }
+        .radio__bg{
+            padding-top: 64px;
+            width: 320px;
+            height: 320px;
+            background-image: url(./img/BG.png);
+            object-fit: contain;
+            background-repeat: no-repeat;
         }
 
         .radio__line {
@@ -97,12 +108,14 @@
 <body>
     <div class="container">
         <div class="title">
-            <h4>左右拖曳滾動條<br/>調整置正確的收音機頻道收聽節目內容</h4>
+            <h4>左右拖曳滾動條<br />調整置正確的收音機頻道收聽節目內容</h4>
             <p><span id="rangevalue">90.0</span></p>
         </div>
+        <div class="radio__bg">
         <div class="radio">
             <input class="" type="range" min="900" max="960" step="5" value="90">
         </div>
+    </div>
     </div>
 
     <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
@@ -122,7 +135,7 @@
             let rest = inputvalue % 10;
 
             const channel = Math.floor(inputvalue / 10)
-            if((channel % 2 )&& (rest === 5)) {
+            if ((channel % 2) && (rest === 5)) {
                 console.log("基數")
                 rest = 4
             }
