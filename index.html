@@ -115,6 +115,7 @@
         <div class="radio">
             <input class="" type="range" min="900" max="960" step="5" value="90">
         </div>
+        <p>你的ID<span id="userId"></p>
     </div>
     </div>
 
@@ -173,16 +174,31 @@
     </script>
     <script>
         function initializeLiff(myLiffId) {
-            liff
-                .init({
-                    liffId: myLiffId
-                })
-                .then(() => {
-                    // start to use LIFF's api
-                    initializeApp();
-                })
-                .catch((err) => {
-                });
+            liff.init({
+                liffId: myLiffId
+            })
+            .then(() => {
+                // start to use LIFF's api
+                if (!liff.isLoggedIn()) {
+                    alert("用戶未登入");
+                    liff.login();
+                } else {
+                    alert("用戶已登入");
+                    liff.getProfile()
+                    .then(profile => {
+                        const userId = profile.userId;
+                        let span = document.querySelector('#userId')
+                        span.innerHTML = `userId:${userId}`
+                    })
+                    .catch((err) => {
+                        console.log('error', err);
+                    });
+                }
+                initializeApp();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
         }
         initializeLiff('1656608345-0Yx6zYOX');
     </script>
